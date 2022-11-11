@@ -16,74 +16,37 @@
                 <div class="navigation">
                     <div class="logo">WE4U</div>
                     <div class="links">                   
-                        <span><a style="color:white;text-decoration: none;margin-top: 25px;" href="{{ url_for('Home') }}">LOGIN</a></span>              
-                        <a class="button" href="{{ url_for('Home') }}">SIGNUP</a>
+                        <span><a style="color:white;text-decoration: none;margin-top: 25px;" href="{{ url_for('Login') }}">LOGIN</a></span>              
+                        <a class="button" href="{{ url_for('Register') }}">SIGNUP</a>
                     </div>
                 </div>
             </header>
             <div class="main">
                 <div class="main-text">
                     <div class="main-large"><h1 style="font-size: 62px;">WE CARE FOR U</h1>
-                    <h5 style="font-size:25px;margin-left: 15px;"> Expert consultation from the <br>Safety and Comfort of your Home.<br></h5>
-                    <button class="button2" href="{{ url_for('Home') }}">GET STARTED</button></div>
+                    <h5 style="font-size:25px;margin-left: 15px;"> Donate Plasma. Save Life!<br></h5>
+                    <button class="button2" href="{{ url_for('Login') }}">GET STARTED</button></div>
                     
                 </div>
            
-                <div class="main-image"></div>
+                <div class="main-image">
+                    <img src="../static/images/main.jpg" alt="" style="width: 500px;height: 400px; margin-right: 370px;" >
+                </div>
                 
            
                 <div class="main-content">
                     <div class="content">
                         <br>
-                        <h1>Skip the waiting room<br>Consult with a doctor<br></h1>
+                        <h1>Skip the Donation Bank<br>Get Donor Instantly<br></h1>
                      
                         <div class="content-tick">
-                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;<img class="tick"src="../static/images/tick.png">Fees starting at ₹99</h5>
-                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;<img class="tick"src="../static/images/tick.png">Verified doctors respond in 5 minutes</h5>
-                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;<img class="tick"src="../static/images/tick.png">100% Private and confidential</h5>
+                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;<img class="tick"src="../static/images/tick.png">Filter nearby Donors</h5>
+                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;<img class="tick"src="../static/images/tick.png">Verified Eligible Donors</h5>
+                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;<img class="tick"src="../static/images/tick.png">Track the Donors</h5>
                         </div>
                     </div>
                 </div>
-                <div class="why-choose-us">
-                    <span class="why-choose-us-title">Robbie Concerns</span>
-                    <span class="why-choose-us-desc">Robbie mainly focuses on .</span>
-                    <div class="why-choose-us-cards">
-                        <div class="row-1">
-                            <div class="card">
-                                <span class="image-circle"><img src="../static/images/acne.png" alt=""></span>
-                                <span class="card-header">Acne,Pimple</span><br>
-                                <span>Cure your acnes.Get relief from your pimples</span>
-                            </div>
-                            <div class="card">
-                                <span class="image-circle"><img src="../static/images/cough.png" alt=""></span>
-                                <span class="card-header">Cold or Cough</span><br>
-                                <span>Feeling irritated with cough. Take ur consultation</span>
-                            </div>
-                            <div class="card">
-                                <span class="image-circle"><img src="../static/images/vomit.png" alt=""></span>
-                                <span class="card-header">Vomitting</span><br>
-                                <span>Feeling nauseaus. Connect to your doctor</span>
-                            </div>
-                        </div>
-                        <div class="row-1">
-                            <div class="card">
-                                <span class="image-circle"><img src="../static/images/fever.png" alt=""></span>
-                                <span class="card-header">Fever</span><br>
-                                <span>Feeling Sick and uneasy.Get well soon</span>
-                            </div>
-                            <div class="card">
-                                <span class="image-circle"><img src="../static/images/headache.png" alt=""></span>
-                                <span class="card-header">HeadAche</span><br>
-                                <span>Feeling uncomfortable. Connect to yur doctor soon</span>
-                            </div>
-                            <div class="card">
-                                <span class="image-circle"><img src="../static/images/physician.png" alt=""></span>
-                                <span class="card-header">General Physician</span><br>
-                                <span>Have your general checkup done.Consult a general Physician</span><br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="row">
                     <div class="container2">
                         <div class="col-sm-5">
@@ -91,8 +54,8 @@
                         </div>
                         <div class="col-sm-7">
                             <h1>Hey there.. Robbie here! </h1>
-                            <h2>I can help with any sort of <br>medication prescription for general sickness</h2>
-                            <h2>Don't Wait..<br>Tell me your problem<br>Get well soon!</h2>
+                            <h2>I can help with any sort of <br>queries for Plasma Donation</h2>
+                            <h2>Don't Wait..<br>Tell me your problem<br>Get Plasma!</h2>
                         </div>
                     </div>
                 </div>
@@ -102,20 +65,18 @@
         <br>
             <div class="footer">
                 <div class="for-patients">
-                    <span class="footer-title">For Patients</span>
-                    <span><a href="#">Consult a doctor</a></span>
-                    <span><a href="#">Book an appointment</a></span>
+                    <span class="footer-title">For Donors</span>
+                    <span><a href="#">Check Rewards</a></span>
+                    <span><a href="#">Accept/Decline Plasma request</a></span>
                     <span><a href="#">View History</a></span>
-                    <span><a href="#">Search doctors</a></span>
-                    <span><a href="#">Home</a></span>
+                    <span><a href="#">Edit Profile</a></span>
                 </div>
                 <div class="for-doctors">
-                    <span class="footer-title">For Doctors</span>
-                    <span><a href="#">View appointments</a></span>
-                    <span><a href="#">View consultations</a></span>
+                    <span class="footer-title">For Recipients</span>
+                    <span><a href="#">Filter Donors</a></span>
+                    <span><a href="#">Request Donor</a></span>
                     <span><a href="#">History</a></span>
-                    <span><a href="#">Payments</a></span>
-                    <span><a href="#">Your Patients</a></span>
+                    <span><a href="#">Edit Profile</a></span>
                 </div>
                 <div class="contacts">
                     <span class="footer-title">Social Contacts</span>
@@ -132,22 +93,7 @@
   
         </div>
     </body>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        
-    <!-- plugin for jquery validation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"> </script>
-    
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>
 
 

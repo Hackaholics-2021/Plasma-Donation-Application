@@ -95,22 +95,21 @@ span .active{
     background-color: #343937;
 }
 .main-image{
-    background-image: url("../images/form.png");
+    background-image: url(../images/form.png);
     margin-top: 50px;
-    width:30%;
+    width: 30%;
     height: 450px;
-    background-repeat: round;
+    /* background-repeat: round; */
     text-align: center;
     float: right;
-    margin-right:80px;
-   
+    margin-right: 150px;
 }
 .main-large{
     font-family: 'Titillium Web', sans-serif;
     float: left;
     margin-top: 50px;
-    margin-left: 275px;
-    color:white;
+    margin-left: 200px;
+    color: white;
  
 }
 .main-content{
@@ -188,7 +187,7 @@ span .active{
 }
 .footer{
     background-color: #343937;
-    margin-top: 2300px;
+    margin-top: 1700px;
     color:white;
     display:flex;
     justify-content: space-evenly;
@@ -219,6 +218,7 @@ span .active{
     background-color: whitesmoke;
     margin-left: 150px;
     height:400px;
+    margin-top: 200px;
 }
 .col-sm-5{
     width:30%;
