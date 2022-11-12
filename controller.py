@@ -29,7 +29,15 @@ def Home():
     if request.method=="GET":
         return render_template("Home.html")
 
+@app.route('/Login',methods=["POST","GET"])
+def Login():
+    if request.method=="GET":
+        return render_template("Login.html")
 
+@app.route('/Register',methods=["POST","GET"])
+def Register():
+    if request.method=="GET":
+        return render_template("Login.html")
 
 
 if(__name__=="__main__"):
