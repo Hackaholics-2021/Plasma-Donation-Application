@@ -26,7 +26,7 @@
             <span><a href="{{ url_for('Donate') }}">Donate</a></span>
             <span><a href="{{ url_for('Donor_Search') }}">Search Donor</a></span>
             <span><a href="{{ url_for('Home') }}">Emergency</a></span>
-            <span><a href="{{ url_for('Home') }}">Profile</a></span>
+            <span><a href="{{ url_for('Profile', id=id) }}">Profile</a></span>
         </div>
         <a href="{{ url_for('Home') }}" class="logout-btn">Logout</a>
     </div>

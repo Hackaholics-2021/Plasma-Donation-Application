@@ -29,8 +29,18 @@
 					<div class="signup-box">
 						<span class="signup">SIGN IN</span>
 					</div>
-                    
+                    {% with messages=get_flashed_messages() %} 
+                        {% if messages %} 
+                            {% for message in messages %} 
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong> {{ message }} </strong> 
+                            </div>
+                            {% endfor %} 
+                        {% endif %} 
+                        {% endwith %} 
 					<div class="signup-form">
+                        
 						<form action="{{ url_for('Login') }}"  method="POST">
 							<label for = "email" class="email">Email:</label>
 							<input type="text" name="email" placeholder="Enter email" class="form-input">

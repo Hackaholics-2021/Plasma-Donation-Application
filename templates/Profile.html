@@ -22,11 +22,11 @@
             <span>WE4U</span>
         </div>
         <div class="nav-items">
-            <span><a href="#" class="active">Home</a></span>
-            <span><a href="{{ url_for('Consultation',id=id) }}">Search</a></span>
-            <span><a href="{{ url_for('Appointment_patient_info',id=id) }}">Donate</a></span>
+            <span><a href="{{ url_for('Home') }}" >Home</a></span>
+            <span><a href="#">Search</a></span>
+            <span><a href="#">Donate</a></span>
             <span><a href="#">History</a></span>
-            <span><a href="#">Profile</a></span>
+            <span><a href="{{ url_for('Profile',id=id) }}" class="active">Profile</a></span>
            
         </div>
     </div>
