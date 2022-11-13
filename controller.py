@@ -27,7 +27,7 @@ mail = Mail(app)
 @app.route('/',methods=["POST","GET"])
 def Home():
     if request.method=="GET":
-        return render_template("Home.html")
+        return render_template("Landing_Home.html")
 
 @app.route('/Login',methods=["POST","GET"])
 def Login():
@@ -39,6 +39,20 @@ def Register():
     if request.method=="GET":
         return render_template("Login.html")
 
+@app.route('/DonorSearch',methods=["POST","GET"])
+def Donor_Search():
+    if request.method=="GET":
+        return render_template("Donor_Search.html")
+
+@app.route('/DonorFilter',methods=["POST","GET"])
+def Donor_Filter():
+    if request.method=="POST" or request.method=="GET":
+        return render_template("Donor_Filter.html")
+
+@app.route('/Donate',methods=["POST","GET"])
+def Donate():
+    if request.method=="GET":
+        return render_template("Recipient_Filter.html")
 
 if(__name__=="__main__"):
     app.run(debug=True)
