@@ -50,6 +50,71 @@ class PlasmaModel:
         else:
             return None
 
+    def get_user_info_id(self,id):
+        statement = "select * from "+self.users+" where ID='"+id+"';"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        if result: 
+            resultset=ibm_db.fetch_both(result)
+            print(resultset)
+            return resultset
+        else:
+            return None
+
+    def update_user_info(self,data,id):
+        update_value="NAME='"+data['NAME']+"',AGE="+data['AGE']+",DATE_OF_BIRTH='"+data['DATE_OF_BIRTH']+"',WEIGHT="+data['WEIGHT']+",GENDER='"+data['GENDER']+"',AREA='"+data['AREA']+"',DISTRICT='"+data['DISTRICT']+"',STATE='"+data['STATE']+"',EMAIL='"+data['EMAIL']+"',PASSWORD='"+data['PASSWORD']+"',MOBILE_NO="+data['MOBILE_NO']+",BLOOD_GROUP='"+data['BLOOD_GROUP']+"'"
+        statement = "update "+self.users+" set "+update_value+"where ID='"+id+"';"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        if result: 
+            resultset=self.get_user_info_id(id)
+            print(resultset)
+            return resultset
+        else:
+            return None
+
+    def get_user_info_bloodgroup(self,data):
+        statement = "select * from "+self.users+" where BLOOD_GROUP='"+data['BLOOD_GROUP']+"' and STATE='"+data['STATE']+"' and DISTRICT='"+data['DISTRICT']+"'"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        result_fetch=ibm_db.fetch_both(result)
+        resultset=[]
+        if result_fetch: 
+            resultset.append(result_fetch)
+            resultset=[dict(r) for r in resultset] if resultset else None
+            print(resultset)
+            return resultset
+        else:
+            return None
+
+    def insert_into_donations(self,data):
+        statement = "insert into "+self.donations+" values('"+data['DONATE_ID']+"','"+data['DONOR_ID']+"','"+data['DONOR_NAME']+"','"+data['RECIPIENT_ID']+"','"+data['RECIPIENT_NAME']+"','"+data['DATE_OF_DONATION']+"','"+data['BLOOD_GROUP']+"','"+data['LOCATION']+"','"+data['STATUS']+"')"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        print("inserted---> to table ",self.donations )
+
+    def get_donor_filter(self,data,filter):
+        if filter == "agelth":
+            statement = "select * from "+self.users+" where BLOOD_GROUP='"+data['BLOOD_GROUP']+"' and STATE='"+data['STATE']+"' and DISTRICT='"+data['DISTRICT']+"' order by AGE desc"
+        elif filter == "agehtl":
+            statement = "select * from "+self.users+" where BLOOD_GROUP='"+data['BLOOD_GROUP']+"' and STATE='"+data['STATE']+"' and DISTRICT='"+data['DISTRICT']+"' order by AGE asc"
+        elif filter == "genderm":
+            statement = "select * from "+self.users+" where BLOOD_GROUP='"+data['BLOOD_GROUP']+"' and STATE='"+data['STATE']+"' and DISTRICT='"+data['DISTRICT']+"' and GENDER = 'Male'"
+        elif filter == "genderf":
+            statement = "select * from "+self.users+" where BLOOD_GROUP='"+data['BLOOD_GROUP']+"' and STATE='"+data['STATE']+"' and DISTRICT='"+data['DISTRICT']+"' and GENDER = 'Female'"
+        else:
+            statement = "select * from "+self.users+" where BLOOD_GROUP='"+data['BLOOD_GROUP']+"' and STATE='"+data['STATE']+"' and DISTRICT='"+data['DISTRICT']+"'"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        result_fetch=ibm_db.fetch_both(result)
+        resultset=[]
+        if result_fetch: 
+            resultset.append(result_fetch)
+            resultset=[dict(r) for r in resultset] if resultset else None
+            print(resultset)
+            return resultset
+        else:
+            return None
 
 # statement = "create table "+ dsn_uid + ".sample(Id int primary key not null, name varchar(10));"
 # create_table=ibm_db.exec_immediate(conn,statement)
