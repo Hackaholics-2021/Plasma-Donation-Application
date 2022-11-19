@@ -22,10 +22,10 @@
             <span>WE4U</span>
         </div>
         <div class="nav-items">
-            <span><a href="{{ url_for('Landing_home') }}" >Home</a></span>
+            <span><a href="{{ url_for('Landing_home',id=id) }}" >Home</a></span>
             <span><a href="{{ url_for('Donor_Search',id=id) }}">Search Donor</a></span>
-            <span><a href="{{ url_for('Donate') }}">Donate</a></span>
-            <span><a href="{{ url_for('Landing_home') }}">Emergency</a></span>
+            <span><a href="{{ url_for('Donate',id=id) }}">Donate</a></span>
+            <span><a href="{{ url_for('Landing_home',id=id) }}">Emergency</a></span>
             <span><a href="{{ url_for('Profile',id=id) }}" class="active">Profile</a></span>
            
         </div>
@@ -33,12 +33,10 @@
     
     <div class="sidenav">
         <img src="../static/images/profile.png" class="image">
-        <a href="patient_profile#">Donated History</a><br>
-        <a href="#">Receipient Requests</a><br>
-        <a href="#">Medical History</a><br>
-        <a href="#">Emergency Requests</a><br>
-        <a href="#">Rewards</a><br>
-        <a href="#">Update profile</a><br>
+        <a href="{{ url_for('Donated_history',id=id) }}">Donated History</a><br>
+        <a href="{{ url_for('Recipient_request',id=id) }}">Receipient Requests</a><br>
+        <a href="{{ url_for('Get_rewards',id=id) }}">Rewards</a><br>
+        <a href="{{ url_for('Profile',id=id) }}">Update profile</a><br>
         <a href="{{ url_for('Logout') }}">Logout</a><br>
         
 

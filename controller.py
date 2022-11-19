@@ -109,10 +109,19 @@ def Donor_Filter(id,filter,bloodgroup,state,district):
         output=obj.get_donor_filter(data,filter)
         return render_template("Donor_Filter.html",data=output,id=id,bloodgroup=bloodgroup,state=state,district=district)
 
+@app.route('/Recipient_Filter/<id>/<filter>',methods=["POST","GET"])
+def Recipient_Filter(id):
+    obj = PlasmaModel()
+    if request.method=="GET":
+        output=obj.get_pending_requests(id)
+        return render_template("Recipient_Filter.html",id=id,data=output)
+
 @app.route('/Donate/<id>',methods=["POST","GET"])
 def Donate(id):
+    obj = PlasmaModel()
     if request.method=="GET":
-        return render_template("Recipient_Filter.html",id=id)
+        output = obj.get_donations_info_id(id)
+        return render_template("Recipient_Filter.html",id=id,data=output)
 
 @app.route('/location_enter/<donor_id>/<donor_name>/<recipient_id>',methods=["POST","GET"])
 def Location_enter(donor_id,donor_name,recipient_id):
@@ -146,9 +155,45 @@ def Location_enter(donor_id,donor_name,recipient_id):
             'STATUS':"Pending"
         }
         obj.insert_into_donations(tableData)
+        # notify donors about the request
+        msg_to_donor=Message('WE4U Plasma Donor Application',sender='19euit046@skcet.ac.in',recipients=['19euit046@skcet.ac.in'])
+        msg_to_donor.html="<h2>Hello "+donor_name+",</h2><p>Hope you are doing well!</p><p>We hereby inform you that you have a request for Plasma by <b>  "+recipient_info['NAME']+"</b> residing at <b>"+recipient_info['AREA']+", "+recipient_info['DISTRICT'] +", "+ recipient_info['STATE']+"</b> <h4>We offer you a sincere thanks! <br>Your contribution will help us change lives!</h4><p>If you have any questions or concerns, please don't hesitate to contact us we4u@gmail.com. Thank You</p>"
+        mail.send(msg_to_donor)
+
         return render_template("Thankyou_request.html",id=recipient_id)
 
+@app.route('/accept_request/<id>/<donate_id>/<recipient_id>',methods=["POST","GET"])
+def Accept_request(id,donate_id,recipient_id):
+    obj = PlasmaModel()
+    if request.method == "GET":
+        obj.update_status_accepted(donate_id)
+        donor_info=obj.get_user_info_id(id)
+        reward_id=uuid.uuid1()
+        data={
+            'REWARD_ID':str(reward_id),
+            'DONOR_ID':id,
+            'DONOR_NAME':donor_info['NAME'],
+            'REWARD_NAME':'20 Rs CashBack!!'
+        }
+        obj.insert_into_rewards(data)
+        recipient_info=obj.get_user_info_id(recipient_id)
+        donate_info=obj.get_donations_info_id(donate_id)
 
+        # send mobile number of donor to recipient
+        msg_to_recepient=Message('WE4U Plasma Donor Application',sender='19euit046@skcet.ac.in',recipients=['19euit046@skcet.ac.in'])
+        msg_to_recepient.html="<h2>Hello "+recipient_info['NAME']+",</h2><p>Hope you are doing well!</p><p>We hereby inform you that the Donor you have requested for Plasma has accepted your request. </p><br><b>Here is the Mobile no of the donor - "+donor_info['MOBILE_NO']+"</b><br><h4>We offer you a sincere thanks and gratitude for choosing our service!</h4><p>If you have any questions or concerns, please don't hesitate to contact us we4u@gmail.com. Thanks</p>"
+        mail.send(msg_to_recepient)
+
+        # send recipient information to donor
+        msg_to_donor=Message('WE4U Plasma Donor Application',sender='19euit046@skcet.ac.in',recipients=['19euit046@skcet.ac.in'])
+        msg_to_donor.html="<h2>Hello "+donor_info['NAME']+",</h2><p>Hope you are doing well!</p><p>Thank you coming forward to donate your blood.<b><b>Below mentioned is the address and contact number of the recepient</b><i>Location: "+donate_info['LOCATION']+"  Mobile No: "+recipient_info['MOBILE_NO']+"<br><h4>We offer you a sincere thanks and gratitude for choosing our service!</h4><p>If you have any questions or concerns, please don't hesitate to contact us we4u@gmail.com. Thanks</p>"
+        mail.send(msg_to_donor)
+
+        # send rewards to donor
+        msg_to_donor=Message('WE4U Plasma Donor Application',sender='19euit046@skcet.ac.in',recipients=['19euit046@skcet.ac.in'])
+        msg_to_donor.html="<h2>Hello "+donor_info['NAME']+",</h2><p>Thank you for your kind action</p><p>We hereby inform you that we have added a reward <br><b>"+data['REWARD_NAME']+"</b><h4>We offer you a sincere thanks for coming forward in donating plasma!</h4><p>If you have any questions or concerns, please don't hesitate to contact us we4u@gmail.com. Thanks</p>"
+        mail.send(msg_to_donor)
+        return render_template("Thankyou_request_accepted.html",id=id)
 
 @app.route('/Profile/<id>',methods=["POST","GET"])
 def Profile(id):
@@ -174,6 +219,28 @@ def Profile(id):
         }
         data=obj.update_user_info(data,id)
         return render_template("Profile.html",id=id,data=data)
+
+@app.route('/donate_history/<id>',methods=["POST","GET"])
+def Donated_history(id):
+    obj=PlasmaModel()
+    if request.method == "GET":
+        output=obj.get_completed_donations(id)
+        return render_template("Donated_History.html",id=id,data=output)
+    
+@app.route('/Recipient_request/<id>',methods=["POST","GET"])
+def Recipient_request(id):
+    obj = PlasmaModel()
+    if request.method=="GET":
+        output=obj.get_pending_requests(id)
+        return render_template("Recipient_requests.html",id=id,data=output)
+
+@app.route('/Get_rewards/<id>',methods=["POST","GET"])
+def Get_rewards(id):
+    obj=PlasmaModel()
+    if request.method=="GET":
+        output = obj.get_rewards(id)
+        return render_template("Rewards.html",id=id,data=output)
+
 
 @app.route('/Logout',methods=["POST","GET"])
 def Logout():

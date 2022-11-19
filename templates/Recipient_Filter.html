@@ -32,7 +32,7 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/consultation_patient_filter.css') }}"
     />
-    <title>Donor Filter</title>
+    <title>Recipient Filter</title>
   </head>
   <body style="background-color: #f0f5f7">
     <div class="nav">
@@ -75,13 +75,19 @@
                 --Select--
               </button>
               <div class="dropdown-menu 1" style="left: 500px">
-                <a class="dropdown-item" href="{{ url_for('Home') }}"
+                <a
+                  class="dropdown-item"
+                  href="{{ url_for('Recipient_Filter',id=id,filter='null') }}"
                   >--Select--</a
                 >
-                <a class="dropdown-item" href="{{ url_for('Home') }}"
+                <a
+                  class="dropdown-item"
+                  href="{{ url_for('Recipient_Filter',id=id,filter='agelth') }}"
                   >Age Low to High</a
                 >
-                <a class="dropdown-item" href="{{ url_for('Home') }}"
+                <a
+                  class="dropdown-item"
+                  href="{{ url_for('Recipient_Filter',id=id,filter='agehtl') }}"
                   >Age High to Low</a
                 >
               </div>
@@ -98,11 +104,21 @@
                 --Select--
               </button>
               <div class="dropdown-menu 2">
-                <a class="dropdown-item" href="{{ url_for('Home') }}"
+                <a
+                  class="dropdown-item"
+                  href="{{ url_for('Recipient_Filter',id=id,filter='null') }}"
                   >--Select--</a
                 >
-                <a class="dropdown-item" href="{{ url_for('Home') }}">Male</a>
-                <a class="dropdown-item" href="{{ url_for('Home') }}">Female</a>
+                <a
+                  class="dropdown-item"
+                  href="{{ url_for('Recipient_Filter',id=id,filter='genderm') }}"
+                  >Male</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="{{ url_for('Recipient_Filter',id=id,filter='genderf') }}"
+                  >Female</a
+                >
               </div>
             </span>
           </span>
@@ -144,7 +160,7 @@
       </script>
       <br />
       <div class="list-of-doctors">
-        {% if data_doc%} {% for i in data_doc %}
+        {% if data%} {% for i in data %}
         <!-- Name | Age |  Area | District | State | Mob no |  Accept btn | Decline btn-->
         <div class="cards">
           <div class="profile">
@@ -156,224 +172,24 @@
             />
           </div>
           <div class="name-about">
-            <span class="name">
-              {{i.Name}} &nbsp;&nbsp;&nbsp;&nbsp;<img
-                src="{{ url_for('static', filename='images/new-moon.png') }}"
-                alt=""
-                width="10px"
-                height="10px"
-              />
-              &nbsp;available
-            </span>
-            <span class="about">{{i.AboutMe}}</span>
+            <span class="name"> {{i.RECIPIENT_NAME}} </span>
           </div>
           <div class="education-speciality-rating">
-            <span>{{i.Degree}}</span>
-            <span>{{i.Specialization}}</span>
-            <span
-              >Rating: {% if i.Rating==1 %}
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-
-              {% elif i.Rating==2 %}
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-
-              {% elif i.Rating==3 %}
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-
-              {% elif i.Rating==4 %}
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-
-              {% elif i.Rating==5 %}
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              {% else %}
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              <img
-                src="{{ url_for('static', filename='images/star-grey.png') }}"
-                alt=""
-                width="15px"
-                height="15px"
-              />
-              {% endif %}
-            </span>
+            <span>BLOOD GROUP: {{i.BLOOD_GROUP}}</span>
           </div>
           <div class="experience-location-fees">
-            <span>Experience: {{i.Experience}}yrs</span>
-            <span>{{i.District}}, {{i.State}}</span>
-            <span>Fee: 500 Rs.</span>
+            <span>Location: {{i.LOCATION}}yrs</span>
           </div>
+          <div class="status {{i.STATUS}}">
+            <span><b>{{i.STATUS}}</b></span>
+          </div>
+          {% if i.STATUS=='Pending' %}
           <a
-            href="{{ url_for('Confirm_appointment',id=id,doc_id = i.Id, doc_name = i.Name,Patient_name = Patient_name,State = State,District = District,Specialization = Specialization,Description = Description) }}"
+            href="{{ url_for('Accept_request',id=id,donate_id=i.DONATE_ID,recipient_id=i.RECIPEINT_ID) }}"
             class="logout-btn"
-            >Request</a
+            >Donate</a
           >
+          {% endif %}
         </div>
         {% endfor %} {% endif %}
       </div>

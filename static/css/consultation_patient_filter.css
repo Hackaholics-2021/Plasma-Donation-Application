@@ -80,3 +80,9 @@
 .name {
   text-transform: uppercase;
 }
+.Pending {
+  color: rgb(188, 35, 35);
+}
+.Completed {
+  color: green;
+}

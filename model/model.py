@@ -116,6 +116,73 @@ class PlasmaModel:
         else:
             return None
 
+    def get_donations_info_id(self,id):
+        statement = "select * from "+self.donations+" where DONOR_ID='"+id+"';"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        result_fetch=ibm_db.fetch_both(result)
+        resultset=[]
+        if result_fetch: 
+            resultset.append(result_fetch)
+            resultset=[dict(r) for r in resultset] if resultset else None
+            print(resultset)
+            return resultset
+        else:
+            return None
+
+    def update_status_accepted(self,donate_id):
+        statement = "update "+self.donations+" set STATUS='Completed' where DONATE_ID='"+donate_id+"'"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        print("Updated-->"+self.donations)
+
+    def insert_into_rewards(self,data):
+        statement = "insert into "+self.rewards+" values('"+data['REWARD_ID']+"','"+data['DONOR_ID']+"','"+data['DONOR_NAME']+"','"+data['REWARD_NAME']+"')"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        print("inserted---> to table ",self.rewards )
+
+    def get_completed_donations(self,id):
+        statement = "select * from "+self.donations+" where DONOR_ID='"+id+"' and STATUS = 'Completed';"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        result_fetch=ibm_db.fetch_both(result)
+        resultset=[]
+        if result_fetch: 
+            resultset.append(result_fetch)
+            resultset=[dict(r) for r in resultset] if resultset else None
+            print(resultset)
+            return resultset
+        else:
+            return None
+
+    def get_pending_requests(self,id):
+        statement = "select * from "+self.donations+" where DONOR_ID='"+id+"' and STATUS = 'Pending';"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        result_fetch=ibm_db.fetch_both(result)
+        resultset=[]
+        if result_fetch: 
+            resultset.append(result_fetch)
+            resultset=[dict(r) for r in resultset] if resultset else None
+            print(resultset)
+            return resultset
+        else:
+            return None
+
+    def get_rewards(self,id):
+        statement = "select * from "+self.rewards+" where DONOR_ID='"+id+"';"
+        print(statement)
+        result = ibm_db.exec_immediate(conn,statement)
+        result_fetch=ibm_db.fetch_both(result)
+        resultset=[]
+        if result_fetch: 
+            resultset.append(result_fetch)
+            resultset=[dict(r) for r in resultset] if resultset else None
+            print(resultset)
+            return resultset
+        else:
+            return None
 # statement = "create table "+ dsn_uid + ".sample(Id int primary key not null, name varchar(10));"
 # create_table=ibm_db.exec_immediate(conn,statement)
 # print("Created table")
